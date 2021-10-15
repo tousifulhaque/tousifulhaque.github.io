@@ -1,5 +1,5 @@
 const slider = function () {
-  const slides = document.querySelectorAll(".slide");
+  const slides = document.querySelectorAll(".project");
   const btnLeft = document.getElementById("arrowL");
   const btnRight = document.getElementById("arrowR");
   // const dotContainer = document.querySelector('.dots');
