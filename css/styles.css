@@ -457,7 +457,7 @@ footer {
   margin-bottom: 50px;
 }
 #projects {
-  padding: 50px 15px;
+  /* padding: 50px 15px; */
   border-bottom: 1px solid #dcd9d9;
   text-align: center;
 }
