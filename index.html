@@ -1,344 +1,412 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-  <meta charset="utf-8">
-  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Syed Tousiful Haque</title>
+<meta name="description" content="Syed Tousiful Haque, Ph.D. candidate in Computer Science at Texas State University. Multimodal learning, cross-modal knowledge distillation, on-device AI, and text-to-motion generation.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,700&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#F2F4F7;
+  --surface:#FFFFFF;
+  --ink:#1A2230;
+  --muted:#5A6576;
+  --line:#D9DEE6;
+  --skel:#3A37B0;      /* skeleton / vision modality */
+  --imu:#B87A0B;       /* inertial modality */
+  --link:#3A37B0;
+  --chip:#E7E8F7;
+  color-scheme: light;
+  box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px);
+  padding-bottom:env(safe-area-inset-bottom,0px);
+  --serif:"Source Serif 4", Georgia, "Times New Roman", serif;
+  --sans:"Bricolage Grotesque", "Segoe UI", system-ui, -apple-system, sans-serif;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#141922; --surface:#1B2230; --ink:#E5E9F0; --muted:#9AA4B4; --line:#2C3545;
+    --skel:#9C9AFF; --imu:#F0B44C; --link:#A9A7FF; --chip:#262C46; color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#141922; --surface:#1B2230; --ink:#E5E9F0; --muted:#9AA4B4; --line:#2C3545;
+  --skel:#9C9AFF; --imu:#F0B44C; --link:#A9A7FF; --chip:#262C46; color-scheme:dark;
+}
+*,*::before,*::after{box-sizing:inherit}
+html{scroll-behavior:smooth;scroll-padding-top:calc(env(safe-area-inset-top,0px) + 72px)}
+@media (prefers-reduced-motion: reduce){html{scroll-behavior:auto}}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--serif);font-size:1.0625rem;line-height:1.65;-webkit-font-smoothing:antialiased}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--bg)}
+img{max-width:100%}
+a{color:var(--link);text-decoration-thickness:1px;text-underline-offset:3px}
+a:hover{text-decoration-thickness:2px}
+:focus-visible{outline:2px solid var(--skel);outline-offset:3px;border-radius:2px}
+.wrap{max-width:1080px;margin:0 auto;padding:0 24px}
 
-  <title>Syed Tousiful Haque</title>
-  <meta content="" name="description">
-  <meta content="" name="keywords">
+/* nav */
+header.nav{position:sticky;top:env(safe-area-inset-top,0px);z-index:9;background:color-mix(in srgb,var(--bg) 88%,transparent);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+header.nav .wrap{display:flex;align-items:center;justify-content:space-between;gap:16px;height:60px}
+.brand{font-family:var(--sans);font-weight:700;font-size:1.05rem;color:var(--ink);text-decoration:none;letter-spacing:-0.01em}
+nav ul{display:flex;gap:22px;list-style:none;margin:0;padding:0;font-family:var(--sans);font-size:.95rem}
+nav a{color:var(--muted);text-decoration:none}
+nav a:hover{color:var(--ink)}
+.theme-btn{font:inherit;font-family:var(--sans);font-size:.9rem;background:none;border:1px solid var(--line);color:var(--muted);border-radius:6px;padding:4px 10px;cursor:pointer}
+.theme-btn:hover{color:var(--ink)}
+.cv-btn{font-family:var(--sans);font-size:.9rem;font-weight:600;text-decoration:none;color:var(--bg);background:var(--skel);border:1px solid var(--skel);border-radius:6px;padding:4px 12px;white-space:nowrap}
+.cv-btn:hover{opacity:.88}
+@media (max-width:760px){.nav-right{gap:10px}}
+@media (max-width:480px){.cv-long{display:none}.brand{white-space:nowrap}}
+.nav-right{display:flex;align-items:center;gap:18px}
+@media (max-width:760px){nav ul{display:none}}
 
-  <!-- Favicons -dd->
-  <link href="assets/img/favicon.png" rel="icon">
-  <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+/* hero */
+.hero{display:grid;grid-template-columns:1.05fr 1fr;gap:48px;align-items:center;padding:64px 0 56px}
+.avatar{display:block;width:136px;height:136px;border-radius:50%;object-fit:cover;margin:0 0 24px;border:3px solid var(--surface);box-shadow:0 0 0 1px var(--line)}
+.hero h1{font-family:var(--sans);font-weight:700;font-size:clamp(2.4rem,5.2vw,3.7rem);line-height:1.02;letter-spacing:-0.03em;margin:0 0 14px}
+.role{font-family:var(--sans);font-size:1.12rem;color:var(--muted);margin:0 0 22px;line-height:1.4}
+.hero p.bio{margin:0 0 18px;max-width:34em}
+.status{border-left:3px solid var(--imu);padding:4px 0 4px 14px;margin:22px 0 26px;color:var(--ink);font-size:1rem;max-width:34em}
+.links{display:flex;flex-wrap:wrap;gap:10px;font-family:var(--sans);font-size:.95rem}
+.links a{display:inline-flex;align-items:center;gap:7px;padding:7px 13px;border:1px solid var(--line);border-radius:999px;color:var(--ink);text-decoration:none;background:var(--surface)}
+.links a:hover{border-color:var(--skel);color:var(--skel)}
+.links svg{width:16px;height:16px;flex:none}
 
-  <!-- Google Fonts -->
-  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+.stage{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:16px 16px 12px;position:relative}
+.prompt{font-family:var(--sans);font-size:.92rem;color:var(--ink);background:var(--chip);border-radius:8px;padding:8px 12px;margin-bottom:10px;min-height:2.4em;display:flex;align-items:center;gap:8px}
+.prompt .tag{color:var(--muted);font-size:.82rem;flex:none}
+.prompt .txt::after{content:"";display:inline-block;width:1px;height:1em;background:var(--ink);margin-left:2px;vertical-align:-2px;animation:blink 1s steps(1) infinite}
+.prompt.done .txt::after{display:none}
+@keyframes blink{50%{opacity:0}}
+canvas{display:block;width:100%;height:auto}
+.legend{display:flex;gap:4px 18px;flex-wrap:wrap;font-family:var(--sans);font-size:.8rem;color:var(--muted);margin-top:8px}
+.legend i{display:inline-block;width:14px;height:3px;border-radius:2px;vertical-align:middle;margin-right:6px}
+.cap{font-size:.85rem;color:var(--muted);margin:8px 2px 0;line-height:1.45}
+@media (max-width:880px){.hero{grid-template-columns:1fr;gap:36px;padding-top:40px}}
 
-  <!-- Vendor CSS Files -->
-  <link href="assets/vendor/aos/aos.css" rel="stylesheet">
-  <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-  <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
-  <link href="assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
-  <link href="assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
-  <link href="assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+/* sections */
+section{padding:56px 0;border-top:1px solid var(--line)}
+h2{font-family:var(--sans);font-weight:700;font-size:1.75rem;letter-spacing:-0.02em;margin:0 0 28px}
+h3{font-family:var(--sans);font-weight:600;font-size:1.2rem;letter-spacing:-0.01em;margin:0 0 6px;line-height:1.3}
+.split{display:grid;grid-template-columns:220px 1fr;gap:28px}
+@media (max-width:760px){.split{grid-template-columns:1fr;gap:6px}}
+.meta{font-family:var(--sans);font-size:.92rem;color:var(--muted)}
 
-  <!-- Template Main CSS File -->
-  <link href="assets/css/style.css" rel="stylesheet">
+/* research threads */
+.thread{display:grid;grid-template-columns:220px 1fr;gap:28px;padding:26px 0;border-bottom:1px solid var(--line)}
+.thread:last-child{border-bottom:0}
+.thread .side{font-family:var(--sans);font-size:.92rem;color:var(--muted)}
+.thread .side strong{display:block;color:var(--ink);font-size:1rem;font-weight:600;margin-bottom:2px}
+.now{display:inline-block;font-family:var(--sans);font-size:.78rem;font-weight:600;color:var(--imu);border:1px solid currentColor;border-radius:999px;padding:1px 9px;margin-top:8px}
+.thread p{margin:0 0 12px;max-width:40em}
+.figs{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:1px;background:var(--line);border:1px solid var(--line);border-radius:10px;overflow:hidden;margin:16px 0 12px;max-width:42em}
+.figs div{background:var(--surface);padding:12px 14px}
+.figs b{display:block;font-family:var(--sans);font-size:1.35rem;font-weight:700;letter-spacing:-0.02em;color:var(--ink);line-height:1.2}
+.figs span{font-family:var(--sans);font-size:.8rem;color:var(--muted);line-height:1.3;display:block;margin-top:2px}
+@media (max-width:600px){.figs{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.plinks{display:flex;gap:14px;flex-wrap:wrap;font-family:var(--sans);font-size:.92rem}
+.clip{margin:18px 0 4px;max-width:520px}
+.stage.clip{max-width:none;padding:12px}
+.stage.clip video{border:0;border-radius:8px}
+.clip video{display:block;width:100%;height:auto;border-radius:10px;border:1px solid var(--line);background:#fff}
+.clip figcaption{font-size:.85rem;color:var(--muted);margin-top:8px;line-height:1.45}
+.thumb{display:block;width:100%;margin:14px 0 0;padding:6px;background:#fff;border:1px solid var(--line);border-radius:8px;cursor:zoom-in;text-align:left;font:inherit}
+.thumb img{display:block;width:100%;height:auto;border-radius:4px}
+.thumb span{display:block;font-family:var(--sans);font-size:.75rem;color:#5A6576;margin-top:5px}
+.thumb:hover{border-color:var(--skel)}
+@media (max-width:760px){.thumb{max-width:420px}}
+#cvDialog{border:0;padding:0;border-radius:12px;background:var(--surface);color:var(--ink);width:min(900px,96vw);max-width:96vw;height:92vh;max-height:92vh;overflow:hidden}
+#cvDialog[open]{display:flex;flex-direction:column}
+#cvDialog::backdrop{background:rgba(10,14,22,.72)}
+.cv-head{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:12px 16px;border-bottom:1px solid var(--line)}
+.cv-head h2{font-size:1.1rem;margin:0}
+.cv-actions{display:flex;align-items:center;gap:12px;font-family:var(--sans);font-size:.9rem}
+.cv-actions .lb-close{margin:0;color:var(--ink);border-color:var(--line)}
+.cv-pages{overflow-y:auto;padding:16px;background:var(--bg);display:flex;flex-direction:column;gap:16px;flex:1}
+.cv-pages img{display:block;width:100%;height:auto;background:#fff;border-radius:4px;box-shadow:0 0 0 1px var(--line)}
+#lightbox{border:0;padding:16px;border-radius:12px;background:#fff;max-width:min(1400px,94vw);width:94vw;max-height:92vh}
+#lightbox::backdrop{background:rgba(10,14,22,.72)}
+#lightbox img{display:block;width:100%;height:auto;max-height:calc(92vh - 80px);object-fit:contain}
+.lb-close{display:block;margin:0 0 10px auto;font-family:var(--sans);font-size:.9rem;background:none;border:1px solid #D9DEE6;border-radius:6px;padding:4px 12px;cursor:pointer;color:#1A2230}
+@media (max-width:760px){.thread{grid-template-columns:1fr;gap:8px}}
 
-  <!-- =======================================================
-  * Template Name: iPortfolio - v3.9.0
-  * Template URL: https://bootstrapmade.com/iportfolio-bootstrap-portfolio-websites-template/
-  * Author: BootstrapMade.com
-  * License: https://bootstrapmade.com/license/
-  ======================================================== -->
+/* publications */
+.year{display:grid;grid-template-columns:220px 1fr;gap:28px;padding:8px 0 20px}
+.year > .y{font-family:var(--sans);font-weight:700;font-size:1.4rem;color:var(--muted);letter-spacing:-0.02em}
+.pub{padding:0 0 20px}
+.pub:last-child{padding-bottom:0}
+.pub .t{font-family:var(--sans);font-weight:600;font-size:1.04rem;line-height:1.35;margin:0 0 3px;color:var(--ink)}
+.pub .a{margin:0;font-size:.97rem;color:var(--muted)}
+.pub .a b{color:var(--ink);font-weight:600}
+.pub .v{margin:0 0 6px;font-size:.97rem;font-style:italic}
+.kind{font-style:normal;font-family:var(--sans);font-size:.75rem;color:var(--muted);border:1px solid var(--line);border-radius:4px;padding:0 6px;margin-left:6px;vertical-align:1px}
+@media (max-width:760px){.year{grid-template-columns:1fr;gap:10px}}
+
+/* timeline */
+.tl{list-style:none;margin:0;padding:0}
+.tl li{display:grid;grid-template-columns:220px 1fr;gap:28px;padding:0 0 26px}
+.tl li:last-child{padding-bottom:0}
+.tl p{margin:4px 0 0;max-width:40em}
+@media (max-width:760px){.tl li{grid-template-columns:1fr;gap:2px}}
+
+.two{display:grid;grid-template-columns:1fr 1fr;gap:40px}
+@media (max-width:760px){.two{grid-template-columns:1fr}}
+.plain{list-style:none;margin:0;padding:0}
+.plain li{padding:0 0 14px}
+.plain .meta{display:block}
+
+.skills{display:grid;grid-template-columns:160px 1fr;gap:6px 24px;margin:0}
+.skills dt{font-family:var(--sans);font-size:.95rem;color:var(--muted)}
+.skills dd{margin:0 0 10px}
+@media (max-width:600px){.skills{grid-template-columns:1fr}.skills dd{margin-bottom:14px}}
+
+.contact p{max-width:36em;margin:0 0 18px}
+footer{border-top:1px solid var(--line);padding:28px 0 40px;font-family:var(--sans);font-size:.88rem;color:var(--muted)}
+</style>
 </head>
-
 <body>
-
-  <!-- ======= Mobile nav toggle button ======= -->
-  <i class="bi bi-list mobile-nav-toggle d-xl-none"></i>
-
-  <!-- ======= Header ======= -->
-  <header id="header">
-    <div class="d-flex flex-column">
-
-      <div class="profile">
-        <img src="assets/img/profile_pic.jpg" alt="" class="img-fluid rounded-circle">
-        <h1 class="text-light"><a href="index.html">Syed Tousiful <br> Haque</a></h1>
-        <div class="social-links mt-3 text-center">
-          <a href="https://www.linkedin.com/in/tousiful-haque/" class="linkedin"><i class="bx bxl-linkedin"></i></a>
-          <a href="https://github.com/tousifulhaque" class="linkedin"><i class="bx bxl-github"></i></a>
-          <a href="https://www.instagram.com/tousiful_haque/" class="instagram"><i class="bx bxl-instagram"></i></a>
-          <a href="https://www.facebook.com/haquetousif" class="facebook"><i class="bx bxl-facebook"></i></a>
-        </div>
-      </div>
-
-      <nav id="navbar" class="nav-menu navbar">
-        <ul>
-          <li><a href="#hero" class="nav-link scrollto"><i class="bx bx-home"></i> <span>Home</span></a></li>
-          <li><a href="#about" class="nav-link scrollto"><i class="bx bx-user"></i> <span>About</span></a></li>
-          <li><a href="#education" class="nav-link scrollto"><i class="bi bi-mortarboard"></i> <span>Education</span></a></li>
-          <li><a href="#research" class="nav-link scrollto"><i class="bi bi-file-bar-graph-fill"></i> <span>Research Interest</span></a></li>
-          <li><a href="#publication" class="nav-link scrollto"><i class="bi bi-card-list"></i> <span>Publications</span></a></li>
-          <li><a href="#professional" class="nav-link scrollto"><i class="bi bi-bag-dash-fill"></i> <span>Professional Experience</span></a></li>
-          <li><a href="#extracuricular" class="nav-link scrollto active"><i class="bi bi-trophy-fill"></i> <span>Extracurricular</span></a></li>
-          <li><a href="#contact" class="nav-link scrollto"><i class="bx bx-envelope"></i> <span>Contact</span></a></li>
-        </ul>
-      </nav><!-- .nav-menu -->
+<header class="nav">
+  <div class="wrap">
+    <a class="brand" href="#top">Syed Tousiful Haque</a>
+    <div class="nav-right">
+      <nav aria-label="Sections"><ul>
+        <li><a href="#research">Research</a></li>
+        <li><a href="#publications">Publications</a></li>
+        <li><a href="#experience">Experience</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul></nav>
+      <a class="cv-btn" href="#cv">CV</a>
+      <button class="theme-btn" id="themeBtn" type="button" aria-label="Switch color theme">Dark</button>
     </div>
-  </header>
-  <!-- ======= Hero Section ======= -->
-  <section id="hero" class="d-flex flex-column justify-content-center align-items-center">
-    <div class="hero-container" data-aos="fade-in">
+  </div>
+</header>
+
+<main id="top">
+<div class="wrap">
+  <div class="hero">
+    <div>
+      <img class="avatar" src="assets/profile.jpg" alt="Syed Tousiful Haque" width="136" height="136">
       <h1>Syed Tousiful Haque</h1>
-      <p>I'm a <span class="typed" data-typed-items="ML Enthusiast, Researcher, Problem Solver, Traveller"></span></p>
+      <p class="role">Ph.D. candidate in Computer Science, Texas State University</p>
+      <p class="bio">I work on human motion from two directions: generating it and recognizing it. On the generation side, I build text-to-motion models that turn a written prompt into 3D human motion. My current work is stylized text-to-motion that can mix styles from different reference motions across body parts. On the recognition side, I build models that learn from cameras and then run on a smartwatch, using cross-modal knowledge distillation and multi-sensor fusion that keeps working when a sensor goes missing.</p>
+      <p class="bio">Most of it is about fall detection for older adults: models that have to be accurate on noisy, real-world sensor data and fast on very small hardware.</p>
+      <p class="status">Expected defense: April 2027. I’m looking for postdoctoral and research scientist roles in multimodal learning, efficient on-device AI, and human motion generation.</p>
+      <div class="links">
+        <a href="mailto:tousifhaque4@gmail.com"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg>Email</a>
+        <a href="https://scholar.google.com/citations?user=Mox72AEAAAAJ&amp;hl=en" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 3 1 9.5l11 6.5 9-5.3V17h2V9.5L12 3Zm-6 10.2V17c0 1.7 2.7 3.5 6 3.5s6-1.8 6-3.5v-3.8l-6 3.5-6-3.5Z"/></svg>Google Scholar</a>
+        <a href="https://github.com/tousifulhaque" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-3.2 19.5c.5.1.7-.2.7-.5v-1.7c-2.8.6-3.4-1.3-3.4-1.3-.5-1.2-1.1-1.5-1.1-1.5-.9-.6.1-.6.1-.6 1 .1 1.5 1 1.5 1 .9 1.5 2.4 1.1 3 .8.1-.6.4-1.1.6-1.3-2.2-.3-4.6-1.1-4.6-5 0-1.1.4-2 1-2.7-.1-.3-.4-1.3.1-2.7 0 0 .8-.3 2.8 1a9.6 9.6 0 0 1 5 0c1.9-1.3 2.8-1 2.8-1 .5 1.4.2 2.4.1 2.7.6.7 1 1.6 1 2.7 0 3.9-2.4 4.7-4.6 5 .4.3.7.9.7 1.9V21c0 .3.2.6.7.5A10 10 0 0 0 12 2Z"/></svg>GitHub</a>
+        <a href="https://www.linkedin.com/in/tousiful-haque" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5ZM3 9.5h4V21H3V9.5Zm6.5 0h3.8v1.6h.1c.5-1 1.8-2 3.8-2 4 0 4.8 2.6 4.8 6V21h-4v-5.2c0-1.2 0-2.8-1.7-2.8s-2 1.3-2 2.7V21h-4V9.5Z"/></svg>LinkedIn</a>
+        <a href="#cv"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M14 3H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"/><path d="M14 3v6h6M8 13h8M8 17h5"/></svg>CV</a>
+      </div>
     </div>
-  </section><!-- End Hero -->
 
-  <main id="main">
+    <figure class="stage clip" style="margin:0">
+      <video src="assets/text-to-motion-sample.mp4" autoplay muted loop playsinline controls preload="auto" aria-label="A 3D body mesh walking forward with one arm held out to the side, generated by my stylized text-to-motion model."></video>
+      <figcaption class="cap">A motion generated by my stylized text-to-motion model, rendered as a 3D body mesh.</figcaption>
+    </figure>
+  </div>
+</div>
 
-    <!-- ======= About Section ======= -->
-    <section id="about" class="about">
-      <div class="container">
+<section id="research">
+  <div class="wrap">
+    <h2>Research</h2>
 
-        <div class="section-title">
-          <h2>About</h2>
-        </div>
-
-        <div class="row">
-          <div class="col-lg-4 aos-init aos-animate" data-aos="fade-right">
-            <img src="assets/img/IMG_0047.JPG" class="img-fluid" alt="">
-          </div>
-          <div class="col-lg-8 pt-4 pt-lg-0 content aos-init aos-animate" data-aos="fade-left">
-            <h3>1st year Ph.D. Student</h3>
-            <h4>Department of Computer Science</h4>
-            <h4>Texas State University, TX, USA</h4>
-            <br>
-            <br>
-            <p class="fst-italic">
-              Welcome to my website. I am doing my Ph.D. under the supervison of Dr. Anne Hee Hiong Ngu at the Dept. of CS, TSU.  I received my Bachelor of Science (BSc) in Electrical and Electronics Engineering from Islamic University of Technology.
-            </p>
-            <br>
-
-            <p class="fst-italic">
-              Previously I worked as <strong>Software Engineer</strong>  at Ivivelabs, where I built responsive and performant user interfaces and write unit tests for them.I am an avid learner and love gaining
-              knowledge above and beyond my area of expertise. Currently, I am enthuastic about <strong> Multimodal Machine Learning and Fall Detection.</strong>
-              
-            </p>
-            <br>
-            <p class="fst-italic">
-              I also find interest in reading books, travelling, photography and spirituality. Whether you are a fellow engineer, researcher, potential collaborator 
-              or just interested to talk to me about something, please feel free to contact me through email.
-            </p>
-          </div>
-        </div>
-
-      </div>
-      <section id="education" class="resume">
-        <div class="container">
-  
-          <div class="section-title">
-            <h2>Education</h2>
-          </div>
-  
-          <div class="row">
-            <div class="col-lg-6 aos-init aos-animate" data-aos="fade-up">
-              <div class="resume-item">
-                <h4>Doctor of Philosophy</h4>
-                <br>
-                <h4>Computer Science</h4>
-                <h5>August, 2022 - Present</h5>
-                <p><em>Texas State University, TX, USA</em></p>
-              </div>
-              <div class="resume-item">
-                <h4>Bachelor of Science</h4>
-                <br>
-                <h4>Electrical &amp; Electronic Engineering</h4>
-                <h5>January, 2016 - December, 2019</h5>
-                <p><em>Islamic University of Technology, Dhaka, Bangladesh.</em></p>
-                <p><em>Thesis: </em>Deep Learning Based Skin Lesion Segmentation.</p>
-                <p><em>CGPA: </em>3.45/4.00</p>
-              </div>
-            </div>
-            <div class="col-lg-6 aos-init" data-aos="fade-up" data-aos-delay="100">
-              <div class="resume-item">
-                <h4>Higher Secondary Certificate</h4>
-                <br>
-                <h4>Science</h4>
-                <div class="col-lg-4 col-md-6 icon-box aos-init" data-aos="fade-up">
-                   <h5>June, 2013 - July, 2015</h5>
-                  <p><em>Notre Dame College, Dhaka, Bangladesh.</em></p>
-                  <p><em>GPA: </em>5.00/5.00</p>
-                </div>
-              </div>
-              <div class="resume-item">
-                <h4>Secondary School Certificate</h4>
-                <br>
-                <h4>Science</h4>
-                <h5>January, 2011 - March, 2013</h5>
-                <p><em>Faridpur Zilla School, Faridpur, Bangladesh.</em></p>
-                <p><em>GPA: </em>5.00/5.00</p>
-              </div>
-            </div>
-          </div>
-  
-        </div>
-      </section>
-
-      <section id="research" class="services">
-        <div class="container">
-  
-          <div class="section-title">
-            <h2>Research Interest</h2>
-            </div>
-          
-            <table class="table table-hover">
-              <tbody>
-                <tr>
-                  <td>On device Machine Learning</td>
-                  <td>Multimodal Machine Learning</td>
-                  <td>Computer Vision</td>
-                </tr>
-                <tr>
-                  <td>Graph Analysis</td>
-                  <td>Time Series Analysis</td>
-                  <td>Deep Learning</td>
-                </tr>
-                <tr>
-                  <td>Internet of Things</td>
-                  <td>Data Analytics</td>
-                  <td>Software Engineering</td>
-
-                </tr>
-              </tbody>
-            </table>
-
-      </div></section>
-
-    <!-- ======= Publication Section ======= -->
-    <section id="publication" class="services">
-      <div class="container">
-
-        <div class="section-title">
-          <h2>Publications</h2>
-        </div>
-        <div class="row">
-          <div class="col-lg-12 col-md-12 icon-box aos-init aos-animate" data-aos="fade-up">
-            <div class="icon"><i class="bi bi-card-text"></i></div>
-            <h4 class="title">Combined B-mode and Nakagami Images for Improved Discrimination of Breast Masses using Deep Learning</h4>
-            <p class="description"><em>Sabiq Muhtadi, <strong>Syed Tousiful Haque,</strong> Caterina M. Gallippi</em></p>
-            <p class="description"><em>IEEE International Ultrasonics Symposium- 2022</em> [Abstract Accepted]</p>
-          </div>
+    <div class="thread">
+      <div class="side"><strong>Stylized text-to-motion</strong>Paper under review<br><span class="now">Current work</span><button class="thumb" type="button" data-full="patch" aria-label="Enlarge figure: Overview of my stylized text-to-motion method: a part style encoder turns a reference motion into one style token per body part, which modulate a frozen motion diffusion model, trained with a cycle reconstruction loss and a region-selective style classification loss"><img src="assets/fig-text-to-motion.webp" alt="Overview of my stylized text-to-motion method: a part style encoder turns a reference motion into one style token per body part, which modulate a frozen motion diffusion model, trained with a cycle reconstruction loss and a region-selective style classification loss" loading="lazy"><span>Click to enlarge</span></button></div>
+      <div>
+        <p>I’m developing a text-to-motion method that lets a single generated motion mix styles from different reference motions, body region by body region. Existing methods describe style with one embedding for the whole body. My method instead extracts a style token for each of seven body parts and turns each token into a low-rank update that modulates only that part’s features inside a frozen, pretrained motion diffusion model.</p>
+        <p>Region-aware training losses and region-decoupled classifier-free guidance let the upper and lower body follow different references, for example an angry upper body over a penguin-like, wide-legged gait, while the frozen backbone keeps the whole body coordinated.</p>
+        <div class="figs">
+          <div><b>65.90%</b><span>style composition accuracy, vs. 26.50% for the strongest baseline</span></div>
+          <div><b>87.95%</b><span>whole-body style recognition, best among compared methods</span></div>
+          <div><b>7</b><span>body-part style tokens</span></div>
+          <div><b>0</b><span>backbone weights changed</span></div>
         </div>
       </div>
-    </section>
+    </div>
 
-    <!-- ======= Portfolio Section ======= -->
-    <section id="professional" class="resume">
-      <div class="container">
-
-        <div class="section-title">
-          <h2>Experience</h2>
-        </div>
-
-        <div class="row">
-          <div class="col-lg-6 aos-init aos-animate" data-aos="fade-up">
-            <h3 class="resume-title">Professional Experience</h3>
-            <div class="resume-item">
-              <h4>Doctoral Instructional Assistant</h4>
-              <h5>August, 2022 - Present</h5>
-              <p><em>Department of  Computer Science</em></p>
-              <p><em>Texas State University, TX, USA</em></p>
-              <h6>Courses Taught: Fall 2022</h6>
-              <ul>
-                <li>CS5332: Data Base Theory and Design.</li>
-              </ul>
-            </div>
-          </div>
-          <div class="col-lg-6 aos-init" data-aos="fade-up" data-aos-delay="100">
-            <br>
-            <br>
-            <br>
-            <div class="resume-item">
-              <h4>Software Engineer</h4>
-              <h5>June, 2021 - July, 2022</h5>
-              <p><em>Ivivelabs, Bangladesh</em></p>
-              <br>
-              <h5>Responsibilities</h5>
-              <ul>
-                <li>Designing high performance scalable systems using React framework.</li>
-                <li>Designed highly responsive and performant survey website. </li>
-                <li>Writing test using React Testing Library.</li>
-            </div>
-          </div>
-        </div>
-
+    <div class="thread">
+      <div class="side"><strong>Cross-modal knowledge distillation</strong>MAKD<button class="thumb" type="button" data-full="makd" aria-label="Enlarge figure: MAKD architecture: a skeleton and IMU teacher fused by a Cross-Modal Mixer and Gated Pool Fusion distills features into an IMU-only student"><img src="assets/fig-makd.webp" alt="MAKD architecture: a skeleton and IMU teacher fused by a Cross-Modal Mixer and Gated Pool Fusion distills features into an IMU-only student" loading="lazy"><span>Click to enlarge</span></button></div>
+      <div>
+        <p>A camera-based 3D skeleton model recognizes activities well, but nobody wears a depth camera. I design distillation methods that transfer what a skeleton teacher has learned into a compact student that runs on inertial (IMU) data alone.</p>
+        <p><strong>MAKD</strong> fuses skeleton and inertial streams in a shared feature space with a Cross-Modal Mixer and Gated Pool Fusion, then hands that knowledge to an IMU-only student for when no camera is available. It improves F1 by up to 7.85% on SmartFallMM and 8.65% on UP-Fall, and beats the state-of-the-art C2KD by 5.39% and 8.56%.</p>
+        <div class="plinks"><a href="https://github.com/tousifulhaque/MAKD" target="_blank" rel="noopener">Code</a></div>
       </div>
-    </section>
-    <section id="extracuricular" class="services">
-      <div class="container">
+    </div>
 
-        <div class="section-title">
-          <h2>Extracurricular Activities</h2>
-        </div>
-        <div class="row">
-          <div class="col-lg-12 col-md-12 icon-box aos-init aos-animate" data-aos="fade-up">
-            <div class="icon"><i class="bi bi-trophy"></i></div>
-            <h4 class="title">1st Runner up at Intra University Cricket Tournament</h4>
-            <p class="description"><em>Islamic University of Technology</em></p>
-          </div>
-          <div class="col-lg-12 col-md-12 icon-box aos-init aos-animate" data-aos="fade-up">
-            <div class="icon"><i class="bi bi-trophy"></i></div>
-            <h4 class="title">Champion at Intra University Football Tournament</h4>
-            <p class="description"><em>Islamic University of Technology</em></p>
-          </div>
-        </div>
-
+    <div class="thread">
+      <div class="side"><strong>Selective feature distillation</strong>RightFeatKD (ICPR 2026)<button class="thumb" type="button" data-full="rfkd" aria-label="Enlarge figure: RightFeatKD architecture: intermediate representations of a skeleton Transformer teacher are aligned with an inertial Transformer student, weighted by whether the teacher predicts correctly"><img src="assets/fig-rightfeatkd.webp" alt="RightFeatKD architecture: intermediate representations of a skeleton Transformer teacher are aligned with an inertial Transformer student, weighted by whether the teacher predicts correctly" loading="lazy"><span>Click to enlarge</span></button></div>
+      <div>
+        <p><strong>RightFeatKD</strong> aligns intermediate features of a skeleton Transformer teacher with a lightweight sensor student, weighting only the teacher’s correct predictions and using focal loss for noisy and hard samples. It gains 4.04% (SmartFallMM) and 12.59% (UP-Fall) F1 and beats four logit-based KD methods.</p>
+        <div class="plinks"><a href="https://doi.org/10.1007/978-3-032-31927-2_43" target="_blank" rel="noopener">Paper</a><a href="https://github.com/tousifulhaque/RightFeatKD" target="_blank" rel="noopener">Code</a></div>
       </div>
-    </section>
+    </div>
 
-
-
-    <!-- ======= Contact Section ======= -->
-    <section id="contact" class="contact">
-      <div class="container">
-
-        <div class="section-title">
-          <h2>Contact</h2>
+    <div class="thread">
+      <div class="side"><strong>Real-world deployment</strong>SmartFall smartwatch app</div>
+      <div>
+        <p>I deployed the distilled model in the SmartFall smartwatch app and tested it live with five participants. Against the non-distilled baseline it caught more than twice as many falls and cut false alarms on high-motion activities that look like falls.</p>
+        <div class="figs">
+          <div><b>9,857</b><span>parameters</span></div>
+          <div><b>6.11 ms</b><span>inference latency</span></div>
+          <div><b>81.99%</b><span>real-time F1, up from 56.56%</span></div>
+          <div><b>57 of 75</b><span>falls detected, vs. 23</span></div>
         </div>
-
-        <div class="row aos-init" data-aos="fade-in">
-
-          <div class="col-lg-12 d-flex align-items-stretch">
-            <div class="info">
-              <!-- <div class="address">
-                <i class="bi bi-geo-alt"></i>
-                <h4>Location:</h4>
-                <p>A108 Adam Street, New York, NY 535022</p>
-              </div> -->
-
-              <div class="email">
-                <i class="bi bi-envelope"></i>
-                <h4>Email:</h4>
-                <p>bgu9@txstate.edu</p>
-              </div>
-
-              <div class="phone">
-                <i class="bi bi-phone"></i>
-                <h4>Call:</h4>
-                <p>+1 214 444 569</p>
-              </div>
-
-              </div>
-
-          </div>
-        </div>
-
       </div>
-    </section>
+    </div>
 
-  </main><!-- End #main -->
+    <div class="thread">
+      <div class="side"><strong>Multi-sensor dataset</strong>SmartFallMM (IEEE Sensors Journal 2026)</div>
+      <div>
+        <p>I led the design and collection of SmartFallMM, a synchronized dataset from 51 participants aged 20 to 93 performing 14 activities. It pairs 32-joint 3D skeletons from Azure Kinect depth cameras with accelerometer and gyroscope signals from smartwatches, smartphones and wearable IMUs. I handled multi-device time alignment and data quality, and it is released as open source.</p>
+        <div class="plinks"><a href="https://doi.org/10.1109/JSEN.2026.3720563" target="_blank" rel="noopener">Paper</a></div>
+      </div>
+    </div>
+  </div>
+</section>
 
+<section id="publications">
+  <div class="wrap">
+    <h2>Publications</h2>
 
+    <div class="year"><div class="y">2026</div><div>
+      <div class="pub"><p class="t">SmartFallMM: A Multimodal Dataset for Fall Detection Using Commodity Devices</p><p class="a"><b>S. T. Haque</b> et al.</p><p class="v">IEEE Sensors Journal <span class="kind">Journal</span></p><div class="plinks"><a href="https://doi.org/10.1109/JSEN.2026.3720563" target="_blank" rel="noopener">DOI</a></div></div>
+      <div class="pub"><p class="t">RightFeatKD: Selective Feature-Based Knowledge Distillation</p><p class="a"><b>S. T. Haque</b>, Y. Yan, A. H. H. Ngu</p><p class="v">International Conference on Pattern Recognition (ICPR), Springer, pp. 649–661 <span class="kind">Conference</span></p><div class="plinks"><a href="https://doi.org/10.1007/978-3-032-31927-2_43" target="_blank" rel="noopener">DOI</a><a href="https://github.com/tousifulhaque/RightFeatKD" target="_blank" rel="noopener">Code</a></div></div>
+      <div class="pub"><p class="t">A Survey on Multimodal Wearable Sensor-Based Human Action Recognition</p><p class="a">J. Ni, H. Tang, <b>S. T. Haque</b>, Y. Yan, A. H. H. Ngu</p><p class="v">IEEE Internet of Things Journal <span class="kind">Journal</span></p><div class="plinks"><a href="https://arxiv.org/abs/2404.15349" target="_blank" rel="noopener">arXiv</a></div></div>
+      <div class="pub"><p class="t">Dual-Stream Transformer with Kalman-Based Fusion for Wearable Fall Detection</p><p class="a">A. Pradhan, S. Alamgeer, R. Suvvari, <b>S. T. Haque</b>, A. H. H. Ngu</p><p class="v">Big Data and Cognitive Computing, 10(3) <span class="kind">Journal</span></p><div class="plinks"><a href="https://doi.org/10.3390/bdcc10030090" target="_blank" rel="noopener">DOI</a></div></div>
+    </div></div>
 
-  <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+    <div class="year"><div class="y">2025</div><div>
+      <div class="pub"><p class="t">Enhancing Real-World Fall Detection Using Commodity Devices: A Systematic Study</p><p class="a">A. Yasmin, T. Mahmud, <b>S. T. Haque</b>, S. Alamgeer, A. H. H. Ngu</p><p class="v">Sensors, 25(17) <span class="kind">Journal</span></p><div class="plinks"><a href="https://doi.org/10.3390/s25175249" target="_blank" rel="noopener">DOI</a></div></div>
+    </div></div>
 
-  <!-- Vendor JS Files -->
-  <script src="assets/vendor/purecounter/purecounter_vanilla.js"></script>
-  <script src="assets/vendor/aos/aos.js"></script>
-  <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-  <script src="assets/vendor/glightbox/js/glightbox.min.js"></script>
-  <script src="assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
-  <script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
-  <script src="assets/vendor/typed.js/typed.min.js"></script>
-  <script src="assets/vendor/waypoints/noframework.waypoints.js"></script>
-  <script src="assets/vendor/php-email-form/validate.js"></script>
+    <div class="year"><div class="y">2024</div><div>
+      <div class="pub"><p class="t">LightHART: Lightweight Human Activity Recognition Transformer</p><p class="a"><b>S. T. Haque</b>, J. Ni, J. Li, Y. Yan, A. H. H. Ngu</p><p class="v">International Conference on Pattern Recognition (ICPR 2024), Springer, pp. 425–441 <span class="kind">Conference</span></p><div class="plinks"><a href="https://github.com/tousifulhaque/LightHART-tf" target="_blank" rel="noopener">Code</a></div></div>
+      <div class="pub"><p class="t">Experimental Study of Long Short-Term Memory and Transformer Models for Fall Detection on Smartwatches</p><p class="a"><b>S. T. Haque</b>, M. Debnath, A. Yasmin, T. Mahmud, A. H. H. Ngu</p><p class="v">Sensors, 24(19) <span class="kind">Journal</span></p><div class="plinks"><a href="https://doi.org/10.3390/s24196235" target="_blank" rel="noopener">DOI</a><a href="https://github.com/tousifulhaque/lstmvstranformer" target="_blank" rel="noopener">Code</a></div></div>
+      <div class="pub"><p class="t">Poster: Multimodal ConvTransformer for Human Activity Recognition</p><p class="a"><b>S. T. Haque</b>, A. H. H. Ngu</p><p class="v">IEEE/ACM Conference on Connected Health: Applications, Systems and Engineering Technologies (CHASE), pp. 206–207 <span class="kind">Conference</span></p><div class="plinks"><a href="https://doi.org/10.1109/CHASE60773.2024.00041" target="_blank" rel="noopener">DOI</a></div></div>
+    </div></div>
 
-  <!-- Template Main JS File -->
-  <script src="assets/js/main.js"></script>
+    <div class="year"><div class="y">2022</div><div>
+      <div class="pub"><p class="t">Combined B-mode and Nakagami Images for Improved Discrimination of Breast Masses using Deep Learning</p><p class="a">S. Muhtadi, <b>S. T. Haque</b>, C. M. Gallippi</p><p class="v">IEEE International Ultrasonics Symposium (IUS), pp. 1–4 <span class="kind">Conference</span></p><div class="plinks"><a href="https://doi.org/10.1109/IUS54386.2022.9957624" target="_blank" rel="noopener">DOI</a></div></div>
+    </div></div>
 
+    <p class="meta" style="margin:8px 0 0">Full and up-to-date list on <a href="https://scholar.google.com/citations?user=Mox72AEAAAAJ&amp;hl=en" target="_blank" rel="noopener">Google Scholar</a>.</p>
+  </div>
+</section>
+
+<section id="experience">
+  <div class="wrap">
+    <h2>Experience</h2>
+    <ul class="tl">
+      <li><div class="meta">Aug 2022 – present</div><div><h3>Doctoral Research Assistant</h3><div class="meta">Department of Computer Science, Texas State University</div><p>Multimodal human activity recognition and fall detection: dataset collection, cross-modal knowledge distillation, on-device deployment, and diffusion-based motion generation.</p></div></li>
+      <li><div class="meta">Aug 2022 – present</div><div><h3>Doctoral Instructional Assistant</h3><div class="meta">Department of Computer Science, Texas State University</div><p>Taught and managed Programming for Scientists and Engineers (120 students), writing assignments and exams. TA for Computer Vision, where I designed and gave 5 lectures to about 60 students, and for Database Theory and Design.</p></div></li>
+      <li><div class="meta">Jul 2021 – Jul 2022</div><div><h3>Junior Software Engineer</h3><div class="meta">Ivivelabs, Dhaka, Bangladesh</div><p>Built dynamic web forms with conditional survey logic for the SurveyFlip platform in React, and integrated Stripe payment processing.</p></div></li>
+    </ul>
+  </div>
+</section>
+
+<section>
+  <div class="wrap two">
+    <div>
+      <h2>Education</h2>
+      <ul class="plain">
+        <li><h3>Ph.D., Computer Science</h3><span class="meta">Texas State University, Aug 2022 – present (defense expected April 2027)</span>Dissertation: Cross-Modal Knowledge Transfer for Human Activity Recognition</li>
+        <li><h3>B.Sc., Electrical and Electronic Engineering</h3><span class="meta">Islamic University of Technology, Bangladesh, 2016 – 2019</span>Thesis: Skin Lesion Detection using Convolutional Neural Networks</li>
+      </ul>
+    </div>
+    <div>
+      <h2>Awards and service</h2>
+      <ul class="plain">
+        <li><h3>Graduate Research Award</h3><span class="meta">Texas State University, 2024 and 2025</span></li>
+        <li><h3>Doctoral Retention Scholarship</h3><span class="meta">Texas State University, 2023</span></li>
+        <li><h3>Reviewer, ICPR 2025</h3><span class="meta">5 papers</span></li>
+        <li><h3>Reviewer, Computer Vision and Image Understanding</h3><span class="meta">Elsevier, 2025</span></li>
+        <li><h3>Reviewer, IEEE Access</h3><span class="meta">IEEE</span></li>
+        <li><h3>Reviewer, Discover Computing</h3><span class="meta">Springer Nature</span></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <h2>Skills</h2>
+    <dl class="skills">
+      <dt>Research areas</dt><dd>Multimodal learning, sensor fusion, knowledge distillation, edge AI, wearables, real-time systems, diffusion-based motion generation</dd>
+      <dt>Frameworks</dt><dd>PyTorch, TensorFlow, Keras, Hugging Face, OpenCV; pretrained models such as CLIP and VGG-16</dd>
+      <dt>Languages</dt><dd>Python, C, C++, MATLAB, R, JavaScript; OpenMP; Git</dd>
+    </dl>
+  </div>
+</section>
+
+<section id="contact" class="contact">
+  <div class="wrap">
+    <h2>Contact</h2>
+    <p>I’m happy to talk about research, collaborations, or open positions. Email is the best way to reach me.</p>
+    <div class="links">
+      <a href="mailto:tousifhaque4@gmail.com">tousifhaque4@gmail.com</a>
+      <a href="https://github.com/tousifulhaque" target="_blank" rel="noopener">github.com/tousifulhaque</a>
+      <a href="https://www.linkedin.com/in/tousiful-haque" target="_blank" rel="noopener">LinkedIn</a>
+      <a href="#cv">CV</a>
+    </div>
+    <p class="meta" style="margin-top:18px">Department of Computer Science, Texas State University, San Marcos, TX</p>
+  </div>
+</section>
+</main>
+
+<dialog id="cvDialog" aria-labelledby="cvTitle">
+  <div class="cv-head">
+    <h2 id="cvTitle">Curriculum vitae</h2>
+    <div class="cv-actions"><a href="cv.pdf" data-cv="" target="_blank" rel="noopener">Open PDF</a><button type="button" class="lb-close" id="cvClose">Close</button></div>
+  </div>
+  <div class="cv-pages">
+    <img src="assets/cv-page-1.webp" alt="CV page 1: summary, education, research experience and technical skills" width="1300" height="1682">
+    <img src="assets/cv-page-2.webp" alt="CV page 2: publications, peer review, teaching and industry experience, and awards" width="1300" height="1682" loading="lazy">
+  </div>
+</dialog>
+
+<dialog id="lightbox" aria-label="Enlarged figure">
+  <button type="button" class="lb-close" aria-label="Close figure">Close</button>
+  <img id="lbImg" alt="">
+</dialog>
+
+<footer><div class="wrap">© 2026 Syed Tousiful Haque</div></footer>
+
+<script>
+/* ---------- theme toggle ---------- */
+(function(){
+  const root=document.documentElement, btn=document.getElementById('themeBtn');
+  const mq=window.matchMedia('(prefers-color-scheme: dark)');
+  function current(){const t=root.getAttribute('data-theme');return t?t:(mq.matches?'dark':'light')}
+  function label(){btn.textContent=current()==='dark'?'Light':'Dark'}
+  try{const s=localStorage.getItem('theme');if(s==='dark'||s==='light')root.setAttribute('data-theme',s)}catch(e){}
+  label();
+  btn.addEventListener('click',()=>{const n=current()==='dark'?'light':'dark';root.setAttribute('data-theme',n);try{localStorage.setItem('theme',n)}catch(e){}label();window.dispatchEvent(new Event('themechange'))});
+  mq.addEventListener&&mq.addEventListener('change',()=>{label();window.dispatchEvent(new Event('themechange'))});
+})();
+
+/* ---------- CV link: on claude.ai use the hosted copy, elsewhere cv.pdf ---------- */
+if(window.claude)document.querySelectorAll('a[data-cv]').forEach(a=>{a.href='/_blob/107c0a7b0d8d92f65f0c2d1f1ff50902'});
+/* ---------- CV viewer ---------- */
+(function(){const d=document.getElementById('cvDialog');
+function open(){if(!d.open)d.showModal()}
+function clear(){if(location.hash==='#cv')history.replaceState(null,'',location.pathname+location.search)}
+document.querySelectorAll('a[href="#cv"]').forEach(a=>a.addEventListener('click',e=>{e.preventDefault();open();try{history.replaceState(null,'','#cv')}catch(_){}}));
+document.getElementById('cvClose').addEventListener('click',()=>d.close());
+d.addEventListener('click',e=>{if(e.target===d)d.close()});
+d.addEventListener('close',clear);
+function check(){if(location.hash==='#cv')open()}
+window.addEventListener('hashchange',check);check();})();
+/* ---------- figure lightbox ---------- */
+(function(){const d=document.getElementById('lightbox'),im=document.getElementById('lbImg');
+document.querySelectorAll('.thumb').forEach(b=>b.addEventListener('click',()=>{const i=b.querySelector('img');im.src=i.src;im.alt=i.alt;d.showModal()}));
+d.querySelector('.lb-close').addEventListener('click',()=>d.close());
+d.addEventListener('click',e=>{if(e.target===d)d.close()});})();
+/* ---------- video: respect reduced motion ---------- */
+if(window.matchMedia('(prefers-reduced-motion: reduce)').matches)document.querySelectorAll('.clip video').forEach(v=>{v.removeAttribute('autoplay');v.pause()});
+</script>
 </body>
-
 </html>
